@@ -1,0 +1,32 @@
+#p1{
+    font-size: 20px;
+    line-height: 30px;
+}
+
+#item1 li{
+    float: left;
+    margin-left: 25px;
+}
+
+#item2{
+    list-style-image: url('https://img.icons8.com/android/24/000000/small-axe.png');
+}
+
+#div3{
+    border: 1px red solid;
+    border-radius:10px 20px 30px 40px;
+  }
+  
+#div2 {
+    border-width: 3px;
+    border-color: blue;
+    border-right:dotted blue ;
+    border-left: dashed green;
+    border-top:dotted darkcyan;
+    border-bottom:dashed yellow;
+  }
+
+#p2{
+    font-size: 20px;
+    line-height: 30px;
+}
