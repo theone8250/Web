@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        td {
+            text-align: center;
+            font-size: 40px;
+            width: 150px;
+            cursor: pointer
+        }
+    </style>
+    <title>OOXX</title>
+    <script>
+        var flag = 0;
+        function SetPoint(obj) {
+            if (obj.innerText != "") return;
+            if (flag == 0) {
+                obj.innerText = "O"
+                flag = 1
+            } else {
+                obj.innerText = "X"
+                flag = 0
+            }
+        }
+    </script>
+</head>
+
+<body style="margin: auto;width:65;">
+    <div>
+        <table border="1" style="margin: auto;width: 300px;height: 300px; ">
+            <caption>
+                <h3>OOXX</h3>
+            </caption>
+            <tr>
+                <td id="a1" onclick="SetPoint(document.getElementById('a1'))"></td>
+                <td id="a2" onclick="SetPoint(document.getElementById('a2'))"></td>
+                <td id="a3" onclick="SetPoint(document.getElementById('a3'))"></td>
+            </tr>
+            <tr>
+                <td id="a4" onclick="SetPoint(document.getElementById('a4'))"></td>
+                <td id="a5" onclick="SetPoint(document.getElementById('a5'))"></td>
+                <td id="a6" onclick="SetPoint(document.getElementById('a6'))"></td>
+            </tr>
+            <tr>
+                <td id="a7" onclick="SetPoint(document.getElementById('a7'))"></td>
+                <td id="a8" onclick="SetPoint(document.getElementById('a8'))"></td>
+                <td id="a9" onclick="SetPoint(document.getElementById('a9'))"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
