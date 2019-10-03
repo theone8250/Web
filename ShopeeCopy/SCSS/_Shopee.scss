@@ -1,0 +1,41 @@
+.icon {
+    background-color: #ff0000
+}
+
+.d1 {
+
+    margin-left: 18%;
+    display: flex;
+    width: 500px;
+    height: 300px;
+}
+
+.item {
+    border: #ffffff 1px solid;
+    flex-grow: 1;
+}
+
+.Container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.d2 {
+    display: flex;
+    justify-content: space-around;
+    font-size: 12px;
+    text-align: center;
+
+    img {
+        margin-top: 10px;
+        border-radius: 60%;
+    }
+}
+
+.d3 {
+    display: flex;
+    justify-content: space-around;
+    font-size: 12px;
+    text-align: center;
+}

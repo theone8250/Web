@@ -32,27 +32,27 @@
 }
 
 .d2 {
-  margin-left: 240px;
-}
-
-.d2img > td > img {
-  margin-top: 10px;
-  border-radius: 30px;
-}
-
-.d2text > td {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   font-size: 12px;
+  text-align: center;
+}
+
+.d2 img {
+  margin-top: 10px;
+  border-radius: 60%;
 }
 
 .d3 {
-  margin-left: 200px;
-  margin-top: 10px;
-}
-
-.d3bar {
-  height: 20px;
-  width: 55px;
-  color: white;
-  background-color: green;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: 12px;
+  text-align: center;
 }
 /*# sourceMappingURL=Shopee.css.map */
