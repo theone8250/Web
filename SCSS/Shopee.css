@@ -1,0 +1,58 @@
+.icon {
+  background-color: #ff0000;
+}
+
+.d1 {
+  margin-left: 18%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 500px;
+  height: 300px;
+}
+
+.item {
+  border: #ffffff 1px solid;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.Container {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.d2 {
+  margin-left: 240px;
+}
+
+.d2img > td > img {
+  margin-top: 10px;
+  border-radius: 30px;
+}
+
+.d2text > td {
+  font-size: 12px;
+}
+
+.d3 {
+  margin-left: 200px;
+  margin-top: 10px;
+}
+
+.d3bar {
+  height: 20px;
+  width: 55px;
+  color: white;
+  background-color: green;
+}
+/*# sourceMappingURL=Shopee.css.map */

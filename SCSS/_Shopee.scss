@@ -3,8 +3,20 @@
 }
 
 .d1 {
-    margin-top: 10px;
-    margin-left: 240px;
+    margin-left: 18%;
+    display: flex;
+    width: 500px;
+    height: 300px;
+}
+.item {
+    border:#ffffff 1px solid;
+    flex-grow: 1;
+}
+
+.Container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .d2 {
