@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- bootstrap 4.3.1 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>BMI</title>
+    <script>
+        function GetBmi() {
+            var bmi = 0;
+            H = document.getElementById("height").value / 100;
+            bmi = document.getElementById("weight").value / (H * H);
+            document.getElementById("result").innerHTML = bmi;
+        }
+    </script>
+</head>
+
+<body>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <label>身高:</label>
+                <input type="text" class="form-control" id="height" name="height" />
+                <label>體重:</label>
+                <input type="text" class="form-control" id="weight" name="weight" />
+                <br>
+                <label>結果:</label><label id="result"></label>
+                <br>
+                <button class="btn btn-outline-success" onclick="GetBmi();">計算</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
