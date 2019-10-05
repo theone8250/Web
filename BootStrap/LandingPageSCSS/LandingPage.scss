@@ -1,0 +1,43 @@
+@import "normalize";
+
+.container {
+    margin: 0 auto;
+}
+
+.img3 {
+    display: -webkit-box;  //webkit=Chrome.ms=IE
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.imgsize {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+
+    img {
+        margin-bottom: 4%;
+        width: 75%;
+        height: 75%;
+    }
+}
+
+.footer {
+    margin-top: 4%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.font {
+    -webkit-box-flex: 1;
+    -ms-box-flex: 1;
+    flex: 1;
+    -webkit-box-orient: vertical; //CSS属性用来设置一个元素是水平还是垂直布局其内容
+    -ms-box-orient: vertical;
+    -webkit-box-direction: normal; //定義盒子的佈局順序,normal代表正常,reverse代表反向顯示順序,inheri代表繼承
+    -ms-flex-direction: column; //-flex-direction決定垂直排列及反轉排列,值設定為column，就可以垂直排列
+    flex-direction: column;
+    text-align: center;
+    margin: 4%;
+}
