@@ -13,71 +13,77 @@
 
 <body>
     <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        個人資料--<i>必填</i>
+    <form
+        action="http://isbaas.azurewebsites.net/WebForms/Form2Mail.aspx?mailto=chjh8250@gmail.com&redirect=http://www.google.com"
+        method="POST">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            個人資料--<i>必填</i>
+                        </div>
+                        <div class="card-body">
+                            <p><label>姓名:</label>
+                                <input class="form-control" type="text" placeholder="請輸入姓名" value="" id="fieldName"
+                                    name="fieldName" />
+                            </p>
+                            <p><label>密碼:</label>
+                                <input class="form-control" type="password" value="" id="fieldPwd" name="fieldPwd" />
+                            </p>
+                            <label>性別:</label>
+                            <input type="radio" value="Boy" id="Boy" name="gender" />男生
+                            <input type="radio" value="Girl" id="Girl" name="gender" />女生
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p><label>姓名:</label>
-                            <input class="form-control" type="text" placeholder="請輸入姓名" value="" id="fieldName"
-                                name="fieldName" />
-                        </p>
-                        <p><label>密碼:</label>
-                            <input class="form-control" type="password" value="" id="fieldPwd" name="fieldPwd" />
-                        </p>
-                        <label>性別:</label>
-                        <input type="radio" value="Boy" id="Boy" name="gender" />男生
-                        <input type="radio" value="Girl" id="Girl" name="gender" />女生
+                    <br>
+                    <div class="card ">
+                        <div class="card-header bg-primary text-white">
+                            個人資料--<i>地址</i>
+                        </div>
+                        <div class="card-body">
+                            <p><label>郵遞區號:</label>
+                                <input class="form-control" type="text" value="" id="fieldMail" name="fieldMail" />
+                            </p>
+                            <p><label>縣市:</label>
+                                <select name="city">
+                                    <option value="Taipei" selected>台北</option>
+                                    <option value="New Taipei">新北</option>
+                                    <option value="Hsichu">新竹</option>
+                                </select>
+                            </p>
+                            <p><label>其他地址:</label>
+                                <input class="form-control" type="text" value="" id="fieldAddress"
+                                    name="fieldAddress" />
+                            </p>
+                        </div>
                     </div>
+                    <br>
+                    <button class="btn btn-outline-success" type="submit">送件</button>
+                    <!-- <input type="submit" value="送件"> -->
+                    <input class="btn btn-outline-success" type="reset" value="重新填寫">
                 </div>
-                <br>
-                <div class="card ">
-                    <div class="card-header bg-primary text-white">
-                        個人資料--<i>地址</i>
-                    </div>
-                    <div class="card-body">
-                        <p><label>郵遞區號:</label>
-                            <input class="form-control" type="text" value="" id="fieldMail" name="fieldMail" />
-                        </p>
-                        <p><label>縣市:</label>
-                            <select name="city">
-                                <option value="Taipei" selected>台北</option>
-                                <option value="New Taipei">新北</option>
-                                <option value="Hsichu">新竹</option>
-                            </select>
-                        </p>
-                        <p><label>其他地址:</label>
-                            <input class="form-control" type="text" value="" id="fieldAddress" name="fieldAddress" />
-                        </p>
-                    </div>
-                </div>
-                <br>
-                <button class="btn btn-outline-success" type="submit">送件</button>
-                <!-- <input type="submit" value="送件"> -->
-                <input class="btn btn-outline-success" type="reset" value="重新填寫">
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        個人資料--<i>興趣</i>
-                    </div>
-                    <div class="card-body">
-                        <p><label>興趣:</label>
-                            <input type="checkbox" value="music" id="music" name="music" />音樂
-                            <input type="checkbox" value="sport" id="sport" name="sport" />運動
-                            <input type="checkbox" value="read" id="read" name="read" />閱讀
-                            <input type="checkbox" value="movie" id="movie" name="movie" />電影
-                        </p>
-                        專長:<textarea class="form-control" id="fieldMultiLineText" value="" cols="40"
-                            rows="5"></textarea>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            個人資料--<i>興趣</i>
+                        </div>
+                        <div class="card-body">
+                            <p><label>興趣:</label>
+                                <input type="checkbox" value="music" id="music" name="music" />音樂
+                                <input type="checkbox" value="sport" id="sport" name="sport" />運動
+                                <input type="checkbox" value="read" id="read" name="read" />閱讀
+                                <input type="checkbox" value="movie" id="movie" name="movie" />電影
+                            </p>
+                            專長:<textarea class="form-control" id="fieldMultiLineText" value="" cols="40"
+                                rows="5"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+
 </body>
 
 </html>
