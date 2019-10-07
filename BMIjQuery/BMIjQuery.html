@@ -10,25 +10,64 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>BMI(jQuery)</title>
     <script>
-        //  function GetBmi(height, weight) {
-        //     var bmi = 0;
-        //     H = height / 100;
-        //     bmi = weight / (H * H);
-        //     return bmi;
-        // }
-        $(function () {
+        $(function init() {
             $("#Button1").click(function (e) {
-                var textHeight = $("#textHeight").val();
-                var textWeight = $("#textWeight").val();
-                textHeight = textHeight / 100;
-                var BMI = textWeight / (textHeight * textHeight);
-                $("#result").html(BMI);
+                var height = $("#textHeight").val();
+                var weight = $("#textWeight").val();
+                var bmi = GetBmi(height, weight)
+                $("#result").after(<span style="color: red">+bmi+"</span>);
+                // $("#result").after("<span style="color: red">"+BMI+"</span>")
             });
+
+            $("#CheckAll").click(function (e) {
+                var check = $("#CheckAll").prop("checked");
+                $("#CheckBoxGroup input").prop("checked", check);
+            });
+            $("#sel01").change(sel01_change);
+
+            $("img").hover(hoverin, hoverout)
         });
-        // $(function () {
-        //     init();
-        // });
+
+        function sel01_change() {
+            var val = $(this).val();
+            $("#ImgGroup2 img").removeClass();
+            $("#ImgGroup2 img").addClass(val);
+        }
+
+        function hoverin() {
+            //改變滑鼠指標
+            $(this).css("cursor", "pointer");
+            //設定變大
+            $(this).css("transform", "scale(1.1)").css("transition-duration", "0.1s");
+        };
+        function hoverout() {
+            //設定變小
+            $(this).css("transform", "scale(1)").css("transition-duration", "0.1s");
+        }
+        function GetBmi(height, weight) {
+            var bmi = 0;
+            H = height / 100;
+            bmi = weight / (H * H);
+            return bmi;
+        }
+
+        $(function () {
+            init();
+        });
     </script>
+    <style>
+        .br15 {
+            border-radius: 15px;
+        }
+
+        .br30 {
+            border-radius: 30px;
+        }
+
+        .br50 {
+            border-radius: 50px;
+        }
+    </style>
 </head>
 
 <body>
@@ -43,6 +82,64 @@
             <button class="btn btn-outline-primary" id="Button1">計算</button>
             <br />
             BMI:<span id="result"></span>
+        </div>
+    </div>
+    <hr>
+    <div class="row" style="margin:10px">
+        <div class="col-12">
+            <input id="CheckAll" type="checkbox" />勾選全部
+            <div id="CheckBoxGroup">
+                <input type="checkbox" />項目1
+                <input type="checkbox" />項目2
+                <input type="checkbox" />項目3
+                <input type="checkbox" />項目4
+                <input type="checkbox" />項目5
+                <input type="checkbox" />項目6
+                <input type="checkbox" />項目7
+                <input type="checkbox" />項目8
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="ImgGroup2" class="row" style="margin:10px; padding-top:100px">
+        <div class="col-12">
+            <select id="sel01">
+                <option value="br15">15px</option>
+                <option value="br30">30px</option>
+                <option value="br50">50px</option>
+            </select>
+        </div>
+        <div class="col-4">
+            <img src="../BootStrap/100x100.png" style="width:50%" class="img-responsive" />
+        </div>
+        <div class="col-4">
+            <img src="../BootStrap/100x100.png" style="width:50%" class="img-responsive" />
+        </div>
+        <div class="col-4">
+            <img src="../BootStrap/100x100.png" style="width:50%" class="img-responsive" />
+        </div>
+    </div>
+    <hr>
+    <div class="row" style="margin:10px">
+        <div class="col-4">
+            <img src="../BootStrap/100x100.png" style="width:50%" class="img-responsive" />
+        </div>
+        <div class="col-4">
+            <img src="../BootStrap/100x100.png" style="width:50%" class="img-responsive" />
+        </div>
+        <div class="col-4">
+            <img src="../BootStrap/100x100.png" style="width:50%" class="img-responsive" />
+        </div>
+    </div>
+    <div class="row" style="margin:10px">
+        <div class="col-4">
+            <img src="../BootStrap/100x100.png" style="width:50%" class="img-responsive" />
+        </div>
+        <div class="col-4">
+            <img src="../BootStrap/100x100.png" style="width:50%" class="img-responsive" />
+        </div>
+        <div class="col-4">
+            <img src="../BootStrap/100x100.png" style="width:50%" class="img-responsive" />
         </div>
     </div>
 </body>
