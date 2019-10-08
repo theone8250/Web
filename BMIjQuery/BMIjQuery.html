@@ -10,15 +10,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>BMI(jQuery)</title>
     <script>
-        $(function init() {
-            $("#Button1").click(function (e) {
-                var height = $("#textHeight").val();
-                var weight = $("#textWeight").val();
-                var bmi = GetBmi(height, weight)
-                $("#result").after(bmi);
-                // $("#result").after("<span style="color: red">"+BMI+"</span>")
-            });
-
+        $(function () {
+            init();
+        });
+        function init() {
+            $('#Button1').click(Calculate)
             $("#CheckAll").click(function (e) {
                 var check = $("#CheckAll").prop("checked");
                 $("#CheckBoxGroup input").prop("checked", check);
@@ -26,8 +22,22 @@
             $("#sel01").change(sel01_change);
 
             $("img").hover(hoverin, hoverout)
-        });
-
+        };
+        function Calculate() {
+            //取#textHeight及#textWeight的值jQuery方法
+            var height = $("#textHeight").val();
+            var weight = $("#textWeight").val();
+            var bmi = GetBmi(height, weight)
+            $("#result").after(bmi);
+            // $('#result').html(GetBmi(height, weight));
+            // $("#result").after("<span style="color: red">"+BMI+"</span>")
+        }
+        function GetBmi(height, weight) {
+            var bmi = 0;
+            H = height / 100;
+            bmi = weight / (H * H);
+            return bmi;
+        }
         function sel01_change() {
             var val = $(this).val();
             $("#ImgGroup2 img").removeClass();
@@ -44,16 +54,6 @@
             //設定變小
             $(this).css("transform", "scale(1)").css("transition-duration", "1.1s");
         }
-        function GetBmi(height, weight) {
-            var bmi = 0;
-            H = height / 100;
-            bmi = weight / (H * H);
-            return bmi;
-        }
-
-        $(function () {
-            init();
-        });
     </script>
     <style>
         .br15 {
