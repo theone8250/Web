@@ -24,7 +24,7 @@
         function Show(msg) {
             //請改成jQuery
             // document.getElementById('Label1').innerHTML += msg + "<br />";
-            $('#Label1').html($('#Label1').html() + msg + "<br />");
+            $('#Label1').html(msg);
         }
 
         var BmiObj = {
@@ -60,7 +60,8 @@
             <input id="txbHeight" class="form-control" type="text" placeholder="輸入身高" />
             <label>體重:</label>
             <input id="txbWeight" class="form-control" type="text" placeholder="輸入體重" />
-            <label id="Label1">結果:</label><br />
+            <label>結果:</label>
+            <label id="Label1"></label><br />
             <input class="btn btn-primary" type="button" id="Button1" value="計算" />
         </div>
     </div>

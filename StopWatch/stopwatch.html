@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <title>StopWatch</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="shinputhour84-ggOyR0iXCbMQv3Xipminputhour4MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="shinputhour84-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="shinputhour84-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGinputhourJDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="shinputhour84-JjSmVgyd0p3pXbuttonstartrRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+        @font-face {
+            font-family: 'digitalfont';
+            src: url('digital-7 (italic).ttf');
+        }
+    </style>
+    <script>
+        var inputtime = 0;
+        var inputsec = 0;
+        var inputmin = 0;
+        var inputhour = 0;
+        var timestart = true;
+        function init() {
+            $('#buttonstart').click(function () {
+                inputtime = $('#input1').val();
+                timestart = true;
+                change();
+            });
+            $('#buttonpause').click(function () {
+                timestart = false;
+                change();
+            });
+            $('#buttoncontinue').click(function () {
+                timestart = true;
+                change();
+            });
+        }
+        function change() {
+            if (timestart == false) return;
+            if (inputtime == 0) return;
+            inputsec = Math.floor(inputtime % 60); //Math.floor(x) 最大整數，取小於x的最大整數
+            inputmin = Math.floor((inputtime / 60) % 60);
+            inputhour = Math.floor((inputtime / 3600) % 60);
+            $('#clock').html(`${inputhour}:${inputmin}:${inputsec}`);
+            inputtime--;
+            setTimeout(change, 1000);
+        }
+        $(function () {
+            init();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1>碼表倒數</h1>
+            <input type="text" id="input1" placeholder="請輸入秒數">
+            <br>
+            <h1 id="clock" style="font-family: digitalfont">00:00:00</h1>
+            <input type="button" class="btn btn-outline-primary " value="開始" id="buttonstart">
+            <input type="button" class="btn btn-outline-secondary " value="暫停" id="buttonpause">
+            <input type="button" class="btn btn-outline-success " value="繼續" id="buttoncontinue">
+        </div>
+    </div>
+</body>
+
+</html>

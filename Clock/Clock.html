@@ -46,12 +46,15 @@
             isPause = false;
             showclock();
         }
+
         var isPause = false;
+
         function showclock() {
             var dt = new Date();
             document.getElementById('time1').innerText = dt.Format("yyyy/MM/dd HH:mm:ss")
-            //如果沒有要暫停，就執行setTimeout(showclock,1000)
             if (isPause == false) setTimeout(showclock, 1000)
+            //如果沒有要暫停，就執行 setTimeout(ShowClock, 1000);
+            //if (isPause == false) setTimeout(ShowClock, 1000);
         }
         $(document).ready(function () {
             $('#ButtonPause').click(ButtonPause);
@@ -64,13 +67,13 @@
 <body>
     <div class="container">
         <div class="row">
-            <div  style="margin:0 auto ">
-                <label id="time1" style="font-family: digitalfont">
+            <div style="margin:0 auto ">
+                <h1 id="time1" style="font-family: digitalfont">
                     123
-                </label>
+                </h1>
                 <br>
-                <input type="button" class="btn btn-outline-warning" id="ButtonStart" value="開始" >
-                <input type="button" class="btn btn-outline-warning" id="ButtonPause" value="暫停" >
+                <input type="button" class="btn btn-outline-warning" id="ButtonStart" value="開始">
+                <input type="button" class="btn btn-outline-warning" id="ButtonPause" value="暫停">
             </div>
         </div>
     </div>
