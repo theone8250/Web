@@ -8,6 +8,9 @@
         "inputmin",
         "inputsec",
         "inputtime",
-        "timestart"
+        "timestart",
+        "transinput",
+        "translatelations",
+        "transoutput"
     ]
 }
