@@ -4,7 +4,8 @@
 <head>
     <title>StopWatch</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -26,7 +27,61 @@
         }
     </style>
     <script>
-        var inputtime = 0;
+        function buttonpause() {
+            isPause = true;
+            showclock();
+        }
+        function buttonstart() {
+            isPause = false;
+            $('#text1').text("");// 若執行時，text1已顯示"時間倒數完成"，則改顯示" "。
+            inputsec = $('#inputtime').val();//取得輸入的秒數
+            showclock();
+        }
+        function buttoncontinue() {
+            isPause = false;
+            showclock();
+        }
+        function showclock() {
+            if (isPause == true) {
+                return;
+            }
+            else {//當isPause!=true開始倒數
+                $('#clock').text(inputsec);
+                if (inputsec != 0) {// 如果秒數!=0時inputsec--
+                    inputsec--;
+                    setTimeout(showclock, 1000);
+                }
+                else {
+                    $('#text1').text("時間倒數完成");
+                    isPause = true;
+                }
+            }
+        }
+        $(document).ready(function () {
+            $('#buttonstart').click(buttonstart);
+            $('#buttonpause').click(buttonpause);
+            $('#buttoncontinue').click(buttoncontinue);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1>碼表倒數</h1>
+            <input type="text" id="inputtime" placeholder="請輸入秒數">
+            <br>
+            <h1 id="clock" style="font-family: digitalfont">9876543210</h1>
+            <input type="button" class="btn btn-outline-primary " value="開始" id="buttonstart">
+            <input type="button" class="btn btn-outline-secondary " value="暫停" id="buttonpause">
+            <input type="button" class="btn btn-outline-success " value="繼續" id="buttoncontinue">
+            <h2 id="text1" style="margin-top: 4%;"></h2>
+        </div>
+    </div>
+</body>
+
+</html>
+<!-- var inputtime = 0;
         var inputsec = 0;
         var inputmin = 0;
         var inputhour = 0;
@@ -56,24 +111,6 @@
             inputtime--;
             setTimeout(change, 1000);
         }
-        $(function () {
+        $(document).ready(function () {
             init();
-        });
-    </script>
-</head>
-
-<body>
-    <div class="container">
-        <div class="text-center">
-            <h1>碼表倒數</h1>
-            <input type="text" id="input1" placeholder="請輸入秒數">
-            <br>
-            <h1 id="clock" style="font-family: digitalfont">00:00:00</h1>
-            <input type="button" class="btn btn-outline-primary " value="開始" id="buttonstart">
-            <input type="button" class="btn btn-outline-secondary " value="暫停" id="buttonpause">
-            <input type="button" class="btn btn-outline-success " value="繼續" id="buttoncontinue">
-        </div>
-    </div>
-</body>
-
-</html>
+        }); -->

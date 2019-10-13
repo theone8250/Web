@@ -2,10 +2,10 @@
 <html lang="zh-Hant-TW">
 
 <head>
+    <title>Translator</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Translator</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -29,14 +29,13 @@
                     "Ocp-Apim-Subscription-Key": "9854e25ad84241039600d5e60feddaaf",
                     "Content-Type": "application/json"
                 },
-                url: "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=ko&to=ja&to=es&to=en&to=ru",
+                url: "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=ko&to=ja&to=es&to=en&to=ru&to=fa",
                 data: JSON.stringify([{ "Text": source }]), //要翻譯的文字
                 dataType: "json",
                 success: function (response) {
                     //呼叫遠端服務後的回傳結果
-                    // 判斷按哪顆按鍵(0 => 由左往右翻譯  1 => 由右往左翻譯)
                     judge1 == 0 ? $('#RightArea').val(response[0].translations[transoutput].text) : $('#LeftArea')
-                        .val(response[0].translations[transoutput].text)
+                        .val(response[0].translations[transoutput].text)//判斷按哪個按鍵(0 =>由左往右翻譯，1=>由右往左翻譯)
                 }
             })
         }
@@ -44,17 +43,17 @@
             // source => 需要翻譯的字串
             // transoutput => 需要翻譯成哪種語言
             $('#LtoR').click(() => {
-                let source = $('#LeftArea').val()
-                let transoutput = $('#select1').val()
+                let source = $('#LeftArea').val()//從左邊翻譯區取得輸入的文字
+                let transoutput = $('#select1').val()//從select選單取值
                 trans(source, transoutput, 0)
             });
             $('#RtoL').click(() => {
-                let source = $('#RightArea').val()
+                let source = $('#RightArea').val()//從右邊翻譯區取得輸入的文字
                 let transoutput = $('#select1').val()
                 trans(source, transoutput, 1)
             });
         }
-        $(function () {
+        $(document).ready(function () {
             init();
         });
     </script>
@@ -66,7 +65,7 @@
             <div class="col-md-4">
                 <div class="card ">
                     <div class="card-header bg-primary ">
-                        翻譯區
+                        <h3>翻譯區</h3>
                     </div>
                     <div class="card-body">
                         <textarea class="form-control" rows="6" id="LeftArea"></textarea>
@@ -74,12 +73,13 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <select style="margin-bottom: 18%;" id="select1">
+                <select class="form-control" style="margin-bottom: 18%;" id="select1">
                     <option value="0">翻譯成韓文</option>
                     <option value="1">翻譯成日文</option>
                     <option value="2">翻譯成西班牙文</option>
                     <option value="3">翻譯成英文</option>
                     <option value="4">翻譯成俄文</option>
+                    <option value="5">翻譯成波斯文</option>
                 </select>
                 <div>
                     <button class="btn btn-outline-success" type="button" id="LtoR">→</button>
@@ -92,7 +92,7 @@
             <div class="col-md-4">
                 <div class="card ">
                     <div class="card-header bg-primary ">
-                        翻譯區
+                        <h3>翻譯區</h3>
                     </div>
                     <div class="card-body">
                         <textarea class=" form-control" rows="6" id="RightArea"></textarea>
