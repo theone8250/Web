@@ -2,7 +2,7 @@
 <html lang="zh-Hant-TW">
 
 <head>
-    <title>AddressBook</title>
+    <title>addressBook</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -22,7 +22,7 @@
         var dat = [
             ['Eric', '0912345678', '1980/1/1', 'eric@gmail.com', '台北市光復南路179號13樓'],
         ];
-        function ButtonShowAddNewWindow() {
+        function ButtonShowAddNewWindow() {//顯示新增畫面
             $('#ModalAddNew').modal();
         }
         function ButtonAddNew() {
@@ -42,24 +42,25 @@
                 $("#field_Address").val(""),
                 //新增一個元素;
                 dat.push(item);
-            SaveData();
-            LoadData();
+            SaveData();//儲存記憶體中的資料到localstorage
+            LoadData();//載入之前資料
         };
-        //refresh data table
+        //refresh data table 更新資料
         function RefreshData() {
-            DataTable1.clear();
+            DataTable1.clear();//刪除所有在DataTable1裡的key
             DataTable1.rows.add(dat);
             DataTable1.draw();
         };
         //儲存資料
-        function SaveData() {
-            var str = JSON.stringify(dat);
-            localStorage.setItem('Addressbook', str);
+        function SaveData() {//儲存記憶體中的資料到localstorage
+            var str = JSON.stringify(dat);//取得當前資料的JSON
+            // Storage.setItem()在storage裡新增此key及value值，若 key已存在，則會把值更新成傳入的value。
+            localStorage.setItem('AddressBook', str);
         }
         //載入資料
         function LoadData() {
-            if (localStorage.getItem('Addressbook') != null) {
-                var str = localStorage.getItem('Addressbook');
+            if (localStorage.getItem('AddressBook') != null) {
+                var str = localStorage.getItem('AddressBook');
                 //取回資料
                 dat = JSON.parse(str);
             }
@@ -74,7 +75,6 @@
         function ButtonShowExport() {
             //取得當前資料的JSON
             var str = JSON.stringify(dat);
-            //填入
             $('#field_DataJSON').val(str);
             $('#field_DataJSON').attr('readonly', 'readonly');
             $('#ButtonImport').attr('disabled', 'true');
@@ -85,23 +85,24 @@
             dat = JSON.parse($('#field_DataJSON').val());
             RefreshData();
         }
-        function ButtonUpdate() {
-            var NewItem = [
+        function ButtonUpdate() { //更新資料
+            var NewItem = [//取得當前編輯資料
                 $('#EditField_Name').val(),
                 $('#EditField_Birthday').val(),
                 $('#EditField_TEL').val(),
                 $('#EditField_Email').val(),
                 $('#EditField_Address').val()
             ]
-            var n = dat.indexOf(CurrentEditItem);
-            dat[n] = NewItem;
+            var n = dat.indexOf(CurrentEditItem);//找出當前編輯的資料是哪一個元素
+            dat[n] = NewItem;//置換
             RefreshData();
+            SaveData();//儲存記憶體中的資料到localstorage
         }
         function ButtonDelete() {
-            var n = dat.indexOf(CurrentEditItem);
-            dat.splice(n, 1);
+            var n = dat.indexOf(CurrentEditItem); //找出當前編輯的資料是哪一個元素
+            dat.splice(n, 1);//刪除指定位置的元素
             RefreshData();
-            SaveData();
+            SaveData();//儲存記憶體中的資料到localstorage
         }
         function init() {
             // hook button event
@@ -208,8 +209,9 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button id="ButtonImport" type="button" class="btn btn-primary" data-dismiss="modal">匯入</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">關閉</button>
+                    <button id="ButtonImport" type="button" class="btn btn-outline-primary"
+                        data-dismiss="modal">匯入</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">關閉</button>
                 </div>
             </div>
         </div>
@@ -240,8 +242,10 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button id="ButtonUpdate" type="button" class="btn btn-primary" data-dismiss="modal">儲存</button>
-                    <button id="ButtonDelete" type="button" class="btn btn-danger" data-dismiss="modal">刪除</button>
+                    <button id="ButtonUpdate" type="button" class="btn btn-outline-primary"
+                        data-dismiss="modal">儲存</button>
+                    <button id="ButtonDelete" type="button" class="btn btn-outline-danger"
+                        data-dismiss="modal">刪除</button>
                 </div>
             </div>
         </div>
