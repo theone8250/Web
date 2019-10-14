@@ -40,12 +40,14 @@
             })
         }
         function init() {
+            $('#LeftArea').val(localStorage.getItem("item1"));//保留最後查詢的資訊
             // source => 需要翻譯的字串
             // transoutput => 需要翻譯成哪種語言
             $('#LtoR').click(() => {
                 let source = $('#LeftArea').val()//從左邊翻譯區取得輸入的文字
                 let transoutput = $('#select1').val()//從select選單選擇語言取值
                 trans(source, transoutput, 0)
+                localStorage.setItem("item1",source);
             });
             $('#RtoL').click(() => {
                 let source = $('#RightArea').val()//從右邊翻譯區取得輸入的文字
