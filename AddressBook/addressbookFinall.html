@@ -17,15 +17,19 @@
     <!-- https://datatables.net/ -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <!-- https://cdnjs.com/libraries/jquery-tagsinput -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
     <script>
         //預設資料
         var dat = [
-            ['Eric', '0912345678', '1980/1/1', 'eric@gmail.com', '台北市光復南路179號13樓'],
+            ['Eric', '0912345678', '1980/1/1', 'eric@gmail.com', '台北市光復南路179號13樓', '錯誤點'],
         ];
         function ButtonShowAddNewWindow() {//顯示新增畫面
-            $('#ModalAddNew').modal();
+            $("#ModalAddNew").modal();
         }
-        function ButtonAddNew() {
+        function ButtonAddNew() {//新增
             //取得資料
             var item = [
                 $("#field_Name").val(),
@@ -33,6 +37,7 @@
                 $("#field_TEL").val(),
                 $("#field_Email").val(),
                 $("#field_Address").val(),
+                $("#field_Tags").val(),
             ];
             //清空UI
             $("#field_Name").val(""),
@@ -40,10 +45,12 @@
                 $("#field_TEL").val(""),
                 $("#field_Email").val(""),
                 $("#field_Address").val(""),
+                $("#field_Tags").importTags(""),
                 //新增一個元素;
                 dat.push(item);
             SaveData();//儲存記憶體中的資料到localstorage
             LoadData();//載入之前資料
+
         };
         //refresh data table 更新資料
         function RefreshData() {
@@ -55,43 +62,44 @@
         function SaveData() {//儲存記憶體中的資料到localstorage
             var str = JSON.stringify(dat);//取得當前資料的JSON
             // Storage.setItem()在storage裡新增此key及value值，若 key已存在，則會把值更新成傳入的value。
-            localStorage.setItem('AddressBook', str);
+            localStorage.setItem("AddressBook", str);
         }
         //載入資料
         function LoadData() {
-            if (localStorage.getItem('AddressBook') != null) {
-                var str = localStorage.getItem('AddressBook');
+            if (localStorage.getItem("AddressBook") != null) {
+                var str = localStorage.getItem("AddressBook");
                 //取回資料
                 dat = JSON.parse(str);
             }
             RefreshData();
         }
-        function ButtonShowImport() {
-            $('#field_DataJSON').val('');
-            $('#field_DataJSON').attr('readonly', false);
-            $('#ButtonImport').removeAttr("disabled");
-            $('#ModalDataExport').modal();
+        function ButtonShowImport() {//匯入
+            $("#field_DataJSON").val("");
+            $("#field_DataJSON").attr("readonly", false);
+            $("#ButtonImport").removeAttr("disabled");
+            $("#ModalDataExport").modal();
         }
-        function ButtonShowExport() {
+        function ButtonShowExport() {//匯出
             //取得當前資料的JSON
             var str = JSON.stringify(dat);
-            $('#field_DataJSON').val(str);
-            $('#field_DataJSON').attr('readonly', 'readonly');
-            $('#ButtonImport').attr('disabled', 'true');
+            $("#field_DataJSON").val(str);
+            $("#field_DataJSON").attr("readonly", "readonly");
+            $("#ButtonImport").attr("disabled", "true");
             //顯示modal視窗
-            $('#ModalDataExport').modal();
+            $("#ModalDataExport").modal();
         }
         function ButtonImport() {
-            dat = JSON.parse($('#field_DataJSON').val());
+            dat = JSON.parse($("#field_DataJSON").val());
             RefreshData();
         }
         function ButtonUpdate() { //更新資料
             var NewItem = [//取得當前編輯資料
-                $('#EditField_Name').val(),
-                $('#EditField_Birthday').val(),
-                $('#EditField_TEL').val(),
-                $('#EditField_Email').val(),
-                $('#EditField_Address').val()
+                $("#EditField_Name").val(),
+                $("#EditField_Birthday").val(),
+                $("#EditField_TEL").val(),
+                $("#EditField_Email").val(),
+                $("#EditField_Address").val(),
+                $("#EditField_Tags").importTags()
             ]
             var n = dat.indexOf(CurrentEditItem);//找出當前編輯的資料是哪一個元素
             dat[n] = NewItem;//置換
@@ -106,29 +114,35 @@
         }
         function init() {
             // hook button event
-            $('#ButtonShowAddNewWindow').click(ButtonShowAddNewWindow);
+            $("#ButtonShowAddNewWindow").click(ButtonShowAddNewWindow);
             $("#ButtonAddNew").click(ButtonAddNew);
             $("#ButtonShowImport").click(ButtonShowImport);
             $("#ButtonShowExport").click(ButtonShowExport);
             $("#ButtonImport").click(ButtonImport);
             //修改/刪除
-            $('#ButtonUpdate').click(ButtonUpdate);
-            $('#ButtonDelete').click(ButtonDelete);
+            $("#ButtonUpdate").click(ButtonUpdate);
+            $("#ButtonDelete").click(ButtonDelete);
             // setup DataTable
-            DataTable1 = $('#table1').DataTable(
+            DataTable1 = $("#table1").DataTable(
                 { data: dat }
             );
-            $('#table1 tbody').on('click', 'tr', function () {
+            $("#table1 tbody").on("click", "tr", function () {
                 //取得當前點選的資料
                 CurrentEditItem = DataTable1.row(this).data();
-                $('#ModalEdit').modal();
-                $('#EditField_Name').val(CurrentEditItem[0]);
-                $('#EditField_Birthday').val(CurrentEditItem[1]);
-                $('#EditField_TEL').val(CurrentEditItem[2]);
-                $('#EditField_Email').val(CurrentEditItem[3]);
-                $('#EditField_Address').val(CurrentEditItem[4]);
+                $("#ModalEdit").modal();
+                $("#EditField_Name").val(CurrentEditItem[0]);
+                $("#EditField_Birthday").val(CurrentEditItem[1]);
+                $("#EditField_TEL").val(CurrentEditItem[2]);
+                $("#EditField_Email").val(CurrentEditItem[3]);
+                $("#EditField_Address").val(CurrentEditItem[4]);
+                $("#EditField_Tags").importTags(CurrentEditItem[5]);
             });
+
             LoadData();
+            //設定為tagsInput
+            $("#field_Tags").tagsInput();
+            $("#EditField_Tags").tagsInput();
+            $("#field_Tags").val();
         };
         $(document).ready(function () {
             init();
@@ -184,6 +198,8 @@
                         <input id="field_Email" type="email" class="form-control" />
                         <label>地址</label>
                         <input id="field_Address" type="address" class="form-control" />
+                        <label>分類</label>
+                        <input id="field_Tags" class="form-control" />
                     </form>
                 </div>
                 <!-- Modal footer -->
@@ -238,6 +254,8 @@
                         <input id="EditField_Email" type="email" class="form-control" />
                         <label>地址</label>
                         <input id="EditField_Address" type="address" class="form-control" />
+                        <label>分類</label>
+                        <input id="EditField_Tags" class="form-control" />
                     </form>
                 </div>
                 <!-- Modal footer -->
@@ -261,6 +279,7 @@
                             <th>電話</th>
                             <th>email</th>
                             <th>地址</th>
+                            <th>分類</th>
                         </tr>
                     </thead>
                     <!-- <tbody></tbody> -->
