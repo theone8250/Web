@@ -30,43 +30,63 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">UBike</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    請選擇區域
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" value="全區">全區</a>
+                    <a class="dropdown-item" value="中正區">中正區</a>
+                    <a class="dropdown-item" value="大同區">大同區</a>
+                    <a class="dropdown-item" value="中山區">中山區</a>
+                    <a class="dropdown-item" value="大同區">松山區</a>
+                    <a class="dropdown-item" value="大安區">大安區</a>
+                    <a class="dropdown-item" value="大同區">萬華區</a>
+                    <a class="dropdown-item" value="信義區">信義區</a>
+                    <a class="dropdown-item" value="士林區">士林區</a>
+                    <a class="dropdown-item" value="北投區">北投區</a>
+                    <a class="dropdown-item" value="內湖區">內湖區</a>
+                    <a class="dropdown-item" value="南港區">南港區</a>
+                    <a class="dropdown-item" value="文山區">文山區</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
     <div id="map"></div>
     <script>
         var map;
-        $(function () {
-            $.ajax({
-                type: "Get",
-                url: "https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json",
-                success: function (data) {
-                    console.log("data is", data);
-                },
-                error: function () {
-                    alert("fail");
-                }
-            });
-        });
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 25.041779, lng: 121.5380783 },
-                zoom: 8
-            });
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
-                center: { lat: 25.041779, lng: 121.5380783 },
+        function initMap() {
+            var myLatLng = {
+                lat: 25.041779, lng: 121.5380783
+            };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: myLatLng,
+                zoom: 12
             });
 
             var marker = new google.maps.Marker({
                 position: { lat: 25.041779, lng: 121.5380783 },
                 map: map,
-                title: '億光大樓'
+                title: '億光大樓在這裡'
             });
+
             var icons = {
                 ubike: {
                     icon: 'bike.png'
                 },
                 fewBike: {
                     icon: 'bike_blue.png'
+                },
+                noBike: {
+                    icon: 'nobike.png'
                 },
             };
 
@@ -93,29 +113,31 @@
 
             var opendata = GetOpenData();
             $.each(opendata.retVal, function (i, item) {
-                if (item.sbi < 10) {
-                    var singleItem = {
-                        position: new google.maps.LatLng(item.lat, item.lng),
-                        type: 'fewBike',
-                        title: '可借:' + item.sbi + ' / 總計:' + item.tot
-                    };
-                }
-                else if(item.sbi == 0) {
+                if (item.sbi == 0) {
                     var singleItem = {
                         position: new google.maps.LatLng(item.lat, item.lng),
                         type: 'noBike',
-                        title: '目前無可借車輛' + ' /總計:' + item.tot
+                        title: '目前無車輛可租借' + ' /總計車輛:' + item.tot
+                    };
+                }
+                else if (item.sbi < 10) {
+                    var singleItem = {
+                        position: new google.maps.LatLng(item.lat, item.lng),
+                        type: 'fewBike',
+                        title: '可租借車輛:' + item.sbi + ' / 總計車輛:' + item.tot
                     };
                 }
                 else {
                     var singleItem = {
                         position: new google.maps.LatLng(item.lat, item.lng),
                         type: 'ubike',
-                        title: '可借:' + item.sbi + ' / 總計:' + item.tot
+                        title: '可租借車輛:' + item.sbi + ' / 總計車輛:' + item.tot
                     };
                 }
-                
-                data.push(singleItem);
+                if (item.sarea == area || area == '全區' || area == '') {
+                    data.push(singleItem)
+                }
+
             })
             return data;
         }
@@ -136,6 +158,13 @@
             });
             return ubikelocation;
         }
+        function SelectArea() {
+            area = $(this).html();
+            initMap();
+        }
+        $(document).ready(function () {
+            $('.dropdown-item').click(SelectArea);
+        });
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlKWP4uWjQIR3WDAWLAu6rUhBfc3_ppag &callback=initMap"
         async defer></script>

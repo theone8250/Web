@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <!--<link rel="icon" href="../../favicon.ico">-->
 
-  <title>Guess number</title>
+  <title>LifeNumber</title>
 
   <!-- Bootstrap core CSS -->
   <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -85,20 +85,10 @@
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">
-              <div class="btn-group btn-group-justified">
-                <a id="start" type="button" class="btn btn-default">開始</a>
-                <a id="restart" type="button" class="btn btn-default">放棄重來</a>
-                <a id="cheat" type="button" class="btn btn-default">看答案</a>
-              </div>
-              <br>
-              <ul id="guessResults" class="list-group">
-              </ul>
               <div class="input-group">
-                <span class="input-group-addon" id="sizing-addon1">猜答案</span>
-                <input id="userGuess" type="text" name="" class="form-control" value="" required="required">
+                <input id="userGuess" type="date" name="" class="form-control" value="" required="required">
                 <span class="input-group-btn">
-                  <a id="guess" type="button" class="btn btn-default">猜!</a>
+                  <a id="guess" type="button" class="btn btn-default">分析結果</a>
                 </span>
               </div>
             </div>
@@ -118,104 +108,7 @@
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
   <script>
-    var answer = "";
 
-    function CreateAns() {//產生答案
-      var answer = "";
-      while (answer.length < 4) {
-        var number = Math.floor(Math.random() * 10);
-        if (answer.indexOf(number) == -1) {
-          answer += number;
-        }
-      }
-      return answer
-    }
-
-    function CheckAns() {//判斷幾A幾B
-      var A = 0;
-      var B = 0;
-      var input = $("#userGuess").val();
-
-      for (let i = 0; i < 4; i++) {
-        if (input.indexOf(input[i]) != -1) {//輸入有沒有重複
-          return alert("不能輸入重複的文字");
-        }
-        if (input[i] == answer[i]) {
-          A++;
-        } else if (answer.indexOf(input[i]) != -1) {
-          B++;
-        }
-      }
-      var result = A + "A" + B + "B";
-      return result;
-    }
-
-    function CheckResult() {//輸出幾A幾B
-      var result = CheckAns();
-      if (result == "4A0B") {
-        $("#guessResults").append(
-          '<li class="list-group-item"><span class="label label-success">4A0B</span>' + $("#userGuess")
-            .val() + '</li>');
-        StartGame();
-      } else {
-        $("#guessResults").append('<li class="list-group-item"><span class="label label-danger">' + result +
-          '</span>' + $("#userGuess").val() + '</li>');
-      }
-      $("#userGuess").val("");
-    }
-
-    function start() {//開始
-      answer = CreateAns();
-      //按鈕開啟/關閉
-      $("#start").attr("disabled", "true");
-      $("#cheat").removeAttr("disabled");
-      $("#guess").removeAttr("disabled");
-      $("#restart").removeAttr("disabled");
-    }
-
-    function restart() {//放棄重來
-      $("#guessResults").html("");
-      StartGame();
-    }
-
-    function cheat() {//看答案
-      alert(answer)
-    }
-
-    function guess() {//猜
-      var input = $("#userGuess").val();
-      if (isNaN(input) || input.length != 4) { //isNaN判斷數值是不是NaN、限制輸入長度
-        alert("只能輸入四個數字!");
-      }
-      else {
-        CheckResult();
-      }
-    }
-    $(document).keydown(function () {
-      if (event.keyCode == 13) {//可以直接按Enter猜答案 enter的keycode=13
-        CheckResult();
-      }
-    })
-
-    function StartGame() {
-      //按鈕開啟/關閉
-      $("#start").removeAttr("disabled");
-      $("#restart").attr("disabled", "true");
-      $("#cheat").attr("disabled", "true");
-      $("#guess").attr("disabled", "true");
-    }
-
-    function init() {
-      StartGame();
-      $("#start").click(start);
-      $("#restart").click(restart);
-      $("#cheat").click(cheat);
-      $("#guess").click(guess);
-    }
-
-    $(document).ready(function () {
-      init();
-    });
   </script>
 </body>
 

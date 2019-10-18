@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <title>QABot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+         //取得答案，並執行whenSuccess
+        //whenSuccess:傳入function作為參數
+        function GetAns(msg, WhenSuccess, WhenError) {
+            $.ajax({
+                type: "post",
+                headers: {
+                    "Authorization": "EndpointKey e1d9595e-76bc-400b-8fd2-27c01d82257f",
+                    "Content-Type": "application/json"
+                },
+                url: "https://deleteqamaker20191016.azurewebsites.net/qnamaker/knowledgebases/b8eded5b-369b-4bf5-a899-cfc11f864525/generateAnswer",
+                data: JSON.stringify({ "question": msg }),
+                dataType: "json",
+                success: WhenSuccess,
+                error: WhenError
+            });
+        }
+        function ButtonSend() {
+            var html = $("#TalkContainer").html();
+            var UserSay = $("#inputText").val();
+            //clean
+            $("#inputText").val("");
+            //顯示畫面
+            $("#TalkContainer").html(html + "<br><br>用戶:" + UserSay);
+            //卷軸保持在下方
+            $('#TalkContainer').scrollTop($('#TalkContainer')[0].scrollHeight);
+            //取得答案
+            GetAns(UserSay, function (ret) {
+                //如果成功
+                let html = $("#TalkContainer").html();
+                //顯示畫面
+                $("#TalkContainer").html(html + "<br><br>用戶:" + ret.answers[0].answer);
+                //
+                $('#TalkContainer').scrollTop($('#TalkContainer')[0].scrollHeight);
+            });
+        }
+        $(document).ready(function () {
+            $("#ButtonSend").click(ButtonSend)
+            $('#inputText').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    //enter
+                    ButtonSend();
+                    return false;
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="row" style="margin: 2%">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <!-- 卡片  -->
+            <div class="card">
+                <!-- 卡片標題 -->
+                <span class="card-header bg-primary" style="color:white">
+                    對談機器人
+                </span>
+                <!-- 卡片內容 -->
+                <div class="card-body">
+                    <!-- 對談區 -->
+                    <div id="TalkContainer" style="overflow: auto; height: 300px;">
+                    </div>
+                </div>
+            </div>
+            <form class="form-inline">
+                <input id="inputText" class="form-control" style="width:92.6%">
+                <button type="button" id="ButtonSend" class="btn btn-outline-primary">送出</button>
+            </form>
+        </div>
+        <div class="col-2"></div>
+</body>
+
+</html>
