@@ -137,9 +137,6 @@
       var input = $("#userGuess").val();
 
       for (let i = 0; i < 4; i++) {
-        if (input.indexOf(input[i]) != -1) {//輸入有沒有重複
-          return alert("不能輸入重複的文字");
-        }
         if (input[i] == answer[i]) {
           A++;
         } else if (answer.indexOf(input[i]) != -1) {
@@ -152,16 +149,23 @@
 
     function CheckResult() {//輸出幾A幾B
       var result = CheckAns();
-      if (result == "4A0B") {
+      // var li = document.createElement("li");
+      // li.className = "list-group-item";
+      if (result == "4A0B") { //遊戲勝利
         $("#guessResults").append(
           '<li class="list-group-item"><span class="label label-success">4A0B</span>' + $("#userGuess")
             .val() + '</li>');
-        StartGame();
-      } else {
+        // li.innerHTML = "<span class='label label-success'>" + A + "A" + B + "B</span>" + input;
+        StartGame();//遊戲勝利，重新開始遊戲
+      }
+      else {
         $("#guessResults").append('<li class="list-group-item"><span class="label label-danger">' + result +
           '</span>' + $("#userGuess").val() + '</li>');
+        // li.innerHTML = "<span class='label label-danger'>" + A + "A" + B + "B</span>" + input;
       }
       $("#userGuess").val("");
+    //   document.getElementById("guessResults").appendChild(li);
+    //   document.getElementById("userGuess").value = "";
     }
 
     function start() {//開始
@@ -193,7 +197,7 @@
     }
     $(document).keydown(function () {
       if (event.keyCode == 13) {//可以直接按Enter猜答案 enter的keycode=13
-        CheckResult();
+        guess();
       }
     })
 
@@ -218,5 +222,6 @@
     });
   </script>
 </body>
+<!-- 參考文章比較html()跟val()差別:https://dotblogs.com.tw/brooke/2015/03/04/150623 -->
 
 </html>
