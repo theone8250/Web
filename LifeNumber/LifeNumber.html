@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
 
 <head>
   <title>LifeNumber</title>
@@ -49,9 +49,10 @@
         dateFormat: "yy/mm/dd"//設定日期格式
       });
       $('#AnalysisResult').click(AnalysisResult);
+
     }
 
-    function GetBirthday() {
+    function GetBirthday() {//生日對照星座
       var BirthdayVal = $("#datepicker").val();
       console.log("出生年月日:", BirthdayVal)
       var month = BirthdayVal[0] + BirthdayVal[1];
@@ -94,20 +95,7 @@
       }
     }
 
-    function CreateList(response) {
-      var list = document.getElementById("LifeNumResult");
-      var li = document.createElement("li");
-      li.className = "list-group-item";
-      li.innerHTML = "<span class='label label-info'>" + $("#datepicker").val() + "<button type='button' class='close' data-dismiss='modal' id='closebutton'>"
-        + "<span aria-hidden='true'>&times;</span>" + "</button>" + "</span> 出生的你。星座是 <b><em>" + response.name +
-        "</em></b><div>你的生命靈數 :" + sum + "." + response.lookup[sum] + "</div>";
-      document.getElementById("LifeNumResult").appendChild(li);
-      document.getElementById("closebutton").onclick = function del() {
-        list.removeChild(li);
-      }
-    }
-
-    function AjaxAns() {
+    function AjaxAns() {//從Ajax找出生命靈數的文字敘述
       GetBirthday();
       $.ajax({
         type: "Get",
@@ -120,7 +108,19 @@
       });
     }
 
-    function LifeNumAns() {
+    function CreateList(response) {//建立<li></li>
+      var li = document.createElement("li");
+      li.className = "list-group-item";
+      li.innerHTML = "<span class='label label-info'>" + $("#datepicker").val() + "</span>"
+        + "<button type='button' class='close'>&times;</button> 出生的你，星座是 <b><em>" + response.name +
+        "</em></b><div>你的生命靈數 :" + sum + "." + response.lookup[sum - 1] + "</div>";//sum-1:陣列是從0開始，所以需要減一
+      $('#LifeNumResult').append(li);
+      $('.close').click(function () {//刪除查詢紀錄
+        $(this).parent().remove();
+      })
+    }
+
+    function LifeNumAns() {//計算生命靈數
       var BirthdayVal = $("#datepicker").val();
       console.log("出生年月日:", BirthdayVal);
       sum = 0;
@@ -130,18 +130,15 @@
         }
       }
       console.log("出生年月日總和:", sum);
-      while (true) {
-        if (sum >= 10) {
-          let a = Math.floor(sum / 10);
-          console.log("十位數字:", a);
-          let b = Math.floor(sum % 10);
-          console.log("個位數字:", b);
-          sum = a + b;
-        } else {
-          break;
-        }
+      while (sum >= 10) {//生命靈數9錯誤
+        var tendigit = Math.floor(sum / 10);
+        console.log("十位數字:", tendigit);
+        var digit = Math.floor(sum % 10);
+        console.log("個位數字:", digit);
+        sum = tendigit + digit;
+        console.log("生命靈數:", sum);
       }
-      console.log("生命靈數:", sum);
+      return sum;
     }
 
     function AnalysisResult() {
@@ -215,10 +212,8 @@
                 <a id="AnalysisResult" type="button" class="btn btn-default">分析結果</a>
               </span>
             </div>
-            <div>
-              <ul id="LifeNumResult" class="list-group">
-              </ul>
-            </div>
+            <ul id="LifeNumResult" class="list-group">
+            </ul>
           </div>
         </div>
       </div>
