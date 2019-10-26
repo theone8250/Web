@@ -8,14 +8,255 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="./css/calendar.css">
+    <script>
+        $(document).ready(function () {
+            init();
+            $('#PrevBtn').click(PrevMonth);
+            $('#NextBtn').click(NextMonth);
+        });
+
+        function init() {
+            var DateArray = GetTitle();
+            var year = parseInt(DateArray[0]);
+            var month = parseInt(DateArray[1]);
+            CreateCalendar(year, month);
+        }
+
+        function GetTitle() {
+            let MMYYtitle;
+            return MMYYtitle = $('#OriginMonth').html().split(" ");//.split(" "):根據每個空格切開
+        }
+
+        function CreateCalendar(year, month) {
+            //取得這個月份有幾天new Date(年,月,日 [,時,分,秒,毫秒])時,分,秒,毫秒為選擇性的參數，沒有設定時以0取代
+            var dt = new Date(year, month, 0);
+            var AllDay = dt.getDate();//getDate()取得日(天)1~31
+            var FirstOfWeek = new Date(year, month - 1, 1).getDay();//取得當前月份第一天是星期幾，getDay()取得星期幾，星期日=0
+            console.log('year:', year);
+            console.log('month:', month);
+            console.log('FirstOfWeek:', FirstOfWeek);
+            if (FirstOfWeek == 0) {//getDay()時，星期日=0
+                let first = 7;
+                ForWrite(first);
+            }
+            else {
+                ForWrite(FirstOfWeek);
+            }
+            function ForWrite(k) {
+                let j = 1;
+                for (let i = k; i < 36; i++) {//i=日曆天數格子
+                    var target = document.getElementById(i);
+                    target.innerHTML = `<time datetime=${year}-${month}-${j}>${j}</time>`;
+                    j++;
+                    if (j > AllDay) {
+                        j = 1;
+                    }
+                }
+            }
+        }
+
+        function PrevMonth() { //10 2019
+            CleanALL();
+            let OriginTitle = GetTitle();
+            console.log('OriginTitle:', OriginTitle);
+            let PrevMonth;
+            let PrevYear;
+            if (OriginTitle[1] == '1') {//原本月份1月時換到去年
+                PrevMonth = '12';
+                PrevYear = parseInt(OriginTitle[0]) - 1;
+            }
+            else {
+                PrevYear = parseInt(OriginTitle[0]);
+                PrevMonth = parseInt(OriginTitle[1]) - 1;
+            }
+            $('#OriginMonth').html(PrevYear + " " + PrevMonth);
+            CreateCalendar(PrevYear, PrevMonth);
+        }
+
+        function NextMonth() {
+            CleanALL();
+            let OriginTitle = GetTitle();
+            console.log('OriginTitle:', OriginTitle);
+            let NextMonth;
+            let NextYear;
+            if (OriginTitle[1] == '12') {//原本月份12月時換到明年
+                NextMonth = '1';
+                NextYear = parseInt(OriginTitle[0]) + 1;
+            }
+            else {
+                NextYear = parseInt(OriginTitle[0]);
+                NextMonth = parseInt(OriginTitle[1]) + 1;
+            }
+            $('#OriginMonth').html(NextYear + " " + NextMonth);
+            CreateCalendar(NextYear, NextMonth);
+        }
+
+        function CleanALL() {//將月曆初始
+            for (let i = 1; i < 35; i++) {
+                var target = document.getElementById(i);
+                target.innerHTML = " ";
+            }
+        }
+    </script>
 </head>
+
 <body>
-    
+
+    <div id="divtitle">
+        <button class="btn btn-success" id="PrevBtn">＜Prev</button>
+        <label id="OriginMonth">2019 10</label>
+        <button class="btn btn-success" id="NextBtn">Next＞</button>
+    </div>
+    <div class="calendar" data-toggle="calendar">
+        <div id="weektitle" class="row">
+            <div class="col-xs-12">
+                <h5>Mon</h5>
+            </div>
+            <div class="col-xs-12">
+                <h5>Tue</h5>
+            </div>
+            <div class="col-xs-12">
+                <h5>Wed</h5>
+            </div>
+            <div class="col-xs-12">
+                <h5>Thu</h5>
+            </div>
+            <div class="col-xs-12">
+                <h5>Fri</h5>
+            </div>
+            <div class="col-xs-12">
+                <h5>Sat</h5>
+            </div>
+            <div class="col-xs-12">
+                <h5>Sun</h5>
+            </div>
+        </div>
+        <div id="week1" class="row">
+            <div id="1" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="2" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="3" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="4" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="5" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="6" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="7" class="col-xs-12 calendar-day">
+
+            </div>
+        </div>
+        <div id="week2" class="row">
+            <div id="8" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="9" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="10" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="11" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="12" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="13" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="14" class="col-xs-12 calendar-day">
+
+            </div>
+        </div>
+        <div id="week3" class="row">
+            <div id="15" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="16" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="17" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="18" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="19" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="20" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="21" class="col-xs-12 calendar-day">
+
+            </div>
+        </div>
+        <div id="week4" class="row">
+            <div id="22" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="23" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="24" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="25" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="26" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="27" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="28" class="col-xs-12 calendar-day">
+
+            </div>
+        </div>
+        <div id="week5" class="row">
+            <div id="29" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="30" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="31" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="32" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="33" class="col-xs-12 calendar-day">
+
+            </div>
+
+            <div id="34" class="col-xs-12 calendar-day">
+
+            </div>
+            <div id="35" class="col-xs-12 calendar-day">
+
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

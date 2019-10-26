@@ -22,14 +22,14 @@
         }
 
         .PicCell {
+            /* 在框線設定上，我們將上/左設為白框線、下/右設為灰框線，讓圖塊呈現立體浮起的視覺效果。 */
+            /* 設定<div>CSS的overflow為hidden並限定width/height，這樣子<div>內<img>尺寸較大超出範圍都會被隱藏 */
             border-top: dot 1px white;
             border-left: solid 1px white;
             border-right: solid 1px gray;
             border-bottom: solid 1px gray;
             float: left;
             overflow: hidden;
-            /* 在框線設定上，我們將上/左設為白框線、下/右設為灰框線，讓圖塊呈現立體浮起的視覺效果。 */
-            /* 設定<div>CSS的overflow為hidden並限定width/height，這樣子<div>內<img>尺寸較大超出範圍都會被隱藏 */
         }
     </style>
     <script>
@@ -45,7 +45,7 @@
             $("#NxN").change(GetNxN);
             //變更NxN圖形
             function GetNxN() {//取得NxN圖形
-                //清除舊資料
+                //資料清空
                 $("#dvPuzzle").empty()
                 //取得新資料
                 n = $("#NxN").val();
@@ -71,14 +71,14 @@
 
                 $("#Pic8 img").remove();//將右下角圖片移除變成空的<div>
 
-                //勝利用資料--取得開始前畫面用於結束判定
+                //取得開始前畫面用於結束判定(勝利判斷)
                 endcell = new Array;
                 cells = new Array;
                 for (var i = 0; i < nxn; i++) {
                     endcell[i] = $("#dvPuzzle div").eq(i).attr("id");//取得dvPuzzle div中的id
                     console.log("endcell[i]:", endcell[i]);
                 }
-                //點擊圖片--遊戲邏輯判定
+                //點選圖片
                 $(".PicCell").click(function () {
                     //找尋上下左右有沒有Pic8，有則可以與它交換位置
                     //先找出點擊的Pic是nxn個中第幾個?
@@ -137,7 +137,7 @@
                 console.log("上下左右:", pool)
                 return pool;
             }
-            //遊戲過關判定
+            //勝利判斷
             function GameWin() {
                 for (var i = 0; i < nxn; i++) {
                     cells[i] = $("#dvPuzzle div").eq(i).attr("id");
@@ -177,22 +177,22 @@
             </div>
         </div>
         <div class="col-6">
-            <center>
-                <div class="card">
-                    <legend class="btn btn-dark">遊戲選項</legend>
-                    <div style="margin:2%">
-                        <label>要隨機交換圖塊幾次:</label>
-                        <input type="text" id="ChangeCount" value="87"><br>
-                        <label>請選擇nxn:</label>
-                        <select name="NxN" id="NxN">
-                            <option value="3" selected>3x3</option>
-                            <option value="4">4x4</option>
-                            <option value="5">5x5</option>
-                        </select><br>
-                        <input type="button" id="Startbtn" value="開始" class="btn btn-outline-success" /><br>
-                    </div>
-                </div>
-            </center>
+            <!-- <center> -->
+            <!-- <div class="card"> -->
+            <!-- <header class="btn btn-dark">遊戲選項</header> -->
+            <div style="margin:2%">
+                <label><b>請選擇nxn:</b></label>
+                <select class="form-control" name="NxN" id="NxN">
+                    <option value="3" selected>3x3</option>
+                    <option value="4">4x4</option>
+                    <option value="5">5x5</option>
+                </select><br>
+                <label><b>開始時隨機交換拼圖幾次:</b></label>
+                <input class="form-control" type="text" id="ChangeCount" value="87"><br>
+                <input class="btn btn-outline-success btn-block" type="button" id="Startbtn" value="開始" /><br>
+            </div>
+            <!-- </div> -->
+            <!-- </center> -->
         </div>
     </div>
 
