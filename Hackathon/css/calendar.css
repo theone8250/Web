@@ -14,7 +14,7 @@ body {
 #weektitle>.col-xs-12 {
     background-color: orange;
     width: 14.28571428571429%;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid rgb(255, 255, 255);
     min-height: 50px;
 }
 
@@ -27,7 +27,7 @@ body {
 [data-toggle="calendar"]>.row>.calendar-day {
     background-color: orange;
     width: 14.28571428571429%;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid rgb(255, 255, 255);
     min-height: 120px;
     text-align: center;
 }

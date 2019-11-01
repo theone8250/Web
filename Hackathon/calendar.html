@@ -14,14 +14,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
     <link rel="stylesheet" href="./css/calendar.css">
     <script>
         $(document).ready(function () {
             init();
             $('#PrevBtn').click(PrevMonth);
             $('#NextBtn').click(NextMonth);
+            $('#ShowAddBtn').click(ShowAddBtn);
+            $('#BtnAddNew').click(BtnAddNew);
         });
 
         function init() {
@@ -100,10 +102,29 @@
             CreateCalendar(NextYear, NextMonth);
         }
 
-        function CleanALL() {//將月曆初始
+        function CleanALL() {//將月曆刷新
             for (let i = 1; i < 35; i++) {
                 var target = document.getElementById(i);
                 target.innerHTML = " ";
+            }
+        }
+
+        function ShowAddBtn() {//顯示新增待辦事項畫面
+            $("#AddTodo").modal();
+        }
+
+        function BtnAddNew() {//新增待辦事項
+            let listDate = $('#Tododate').val();
+            let listTodo = $('#Todolist').val();
+            let times = document.getElementsByTagName("time");
+            for (let i = 0; i < times.length; i++) {
+                if (listDate == times[i].dateTime) {
+                    let j = times[i].parentNode;
+                    let node = document.createElement("p"); //Create <p> node
+                    node.innerHTML = listTodo;
+                    j.appendChild(node);
+                    break;
+                }
             }
         }
     </script>
@@ -115,6 +136,7 @@
         <button class="btn btn-success" id="PrevBtn">＜Prev</button>
         <label id="OriginMonth">2019 10</label>
         <button class="btn btn-success" id="NextBtn">Next＞</button>
+        <button class="btn btn-outline-secondary" id="ShowAddBtn">新增事項</button>
     </div>
     <div class="calendar" data-toggle="calendar">
         <div id="weektitle" class="row">
@@ -254,6 +276,32 @@
             </div>
             <div id="35" class="col-xs-12 calendar-day">
 
+            </div>
+        </div>
+    </div>
+    <!-- 新增事項畫面 -->
+    <div class="modal fade" id="AddTodo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">新增</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form>
+                        <label>輸入日期(日期格式 : 2019-10-1)</label>
+                        <input id="Tododate" type="text" class="form-control" />
+                        <label>輸入待辦事項</label>
+                        <input id="Todolist" type="datetime" class="form-control" />
+                    </form>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button id="BtnAddNew" type="button" class="btn btn-outline-primary">新增</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">關閉</button>
+                </div>
             </div>
         </div>
     </div>
