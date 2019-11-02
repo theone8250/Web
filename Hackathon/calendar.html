@@ -14,8 +14,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
     <link rel="stylesheet" href="./css/calendar.css">
     <script>
         $(document).ready(function () {
@@ -31,6 +29,7 @@
             var year = parseInt(DateArray[0]);
             var month = parseInt(DateArray[1]);
             CreateCalendar(year, month);
+
         }
 
         function GetTitle() {
@@ -136,7 +135,7 @@
         <button class="btn btn-success" id="PrevBtn">＜Prev</button>
         <label id="OriginMonth">2019 10</label>
         <button class="btn btn-success" id="NextBtn">Next＞</button>
-        <button class="btn btn-outline-secondary" id="ShowAddBtn">新增事項</button>
+        <button class="btn btn-outline-info" id="ShowAddBtn">新增事項</button>
     </div>
     <div class="calendar" data-toggle="calendar">
         <div id="weektitle" class="row">
