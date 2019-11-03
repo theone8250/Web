@@ -22,6 +22,18 @@
             $('#NextBtn').click(NextMonth);
             $('#ShowAddBtn').click(ShowAddBtn);
             $('#BtnAddNew').click(BtnAddNew);
+            // $("#table1 tbody").on("click", "tr", function () {
+            //     //取得當前點選的資料
+            //     CurrentEditItem = DataTable1.row(this).data();
+            //     $("#ModalEdit").modal();
+            //     $("#EditField_Name").val(CurrentEditItem[0]);
+            //     $("#EditField_Birthday").val(CurrentEditItem[1]);
+            //     $("#EditField_TEL").val(CurrentEditItem[2]);
+            //     $("#EditField_Email").val(CurrentEditItem[3]);
+            //     $("#EditField_Address").val(CurrentEditItem[4]);
+            //     $("#EditField_Tags").importTags(CurrentEditItem[5]);
+            // });
+
         });
 
         function init() {
@@ -138,145 +150,152 @@
         <button class="btn btn-outline-info" id="ShowAddBtn">新增事項</button>
     </div>
     <div class="calendar" data-toggle="calendar">
-        <div id="weektitle" class="row">
-            <div class="col-xs-12">
-                <h5>Mon</h5>
-            </div>
-            <div class="col-xs-12">
-                <h5>Tue</h5>
-            </div>
-            <div class="col-xs-12">
-                <h5>Wed</h5>
-            </div>
-            <div class="col-xs-12">
-                <h5>Thu</h5>
-            </div>
-            <div class="col-xs-12">
-                <h5>Fri</h5>
-            </div>
-            <div class="col-xs-12">
-                <h5>Sat</h5>
-            </div>
-            <div class="col-xs-12">
-                <h5>Sun</h5>
-            </div>
-        </div>
-        <div id="week1" class="row">
-            <div id="1" class="col-xs-12 calendar-day">
+        <table id="table1">
+            <thead>
+                <div id="weektitle" class="row">
+                    <div class="col-xs-12">
+                        <h5>Mon</h5>
+                    </div>
+                    <div class="col-xs-12">
+                        <h5>Tue</h5>
+                    </div>
+                    <div class="col-xs-12">
+                        <h5>Wed</h5>
+                    </div>
+                    <div class="col-xs-12">
+                        <h5>Thu</h5>
+                    </div>
+                    <div class="col-xs-12">
+                        <h5>Fri</h5>
+                    </div>
+                    <div class="col-xs-12">
+                        <h5>Sat</h5>
+                    </div>
+                    <div class="col-xs-12">
+                        <h5>Sun</h5>
+                    </div>
+                </div>
+            </thead>
+            <tbody>
+                <div id="week1" class="row">
+                    <div id="1" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="2" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="2" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="3" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="3" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="4" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="4" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="5" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="5" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="6" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="6" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="7" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="7" class="col-xs-12 calendar-day">
 
-            </div>
-        </div>
-        <div id="week2" class="row">
-            <div id="8" class="col-xs-12 calendar-day">
+                    </div>
+                </div>
+                <div id="week2" class="row">
+                    <div id="8" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="9" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="9" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="10" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="10" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="11" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="11" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="12" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="12" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="13" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="13" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="14" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="14" class="col-xs-12 calendar-day">
 
-            </div>
-        </div>
-        <div id="week3" class="row">
-            <div id="15" class="col-xs-12 calendar-day">
+                    </div>
+                </div>
+                <div id="week3" class="row">
+                    <div id="15" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="16" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="16" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="17" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="17" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="18" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="18" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="19" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="19" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="20" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="20" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="21" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="21" class="col-xs-12 calendar-day">
 
-            </div>
-        </div>
-        <div id="week4" class="row">
-            <div id="22" class="col-xs-12 calendar-day">
+                    </div>
+                </div>
+                <div id="week4" class="row">
+                    <div id="22" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="23" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="23" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="24" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="24" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="25" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="25" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="26" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="26" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="27" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="27" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="28" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="28" class="col-xs-12 calendar-day">
 
-            </div>
-        </div>
-        <div id="week5" class="row">
-            <div id="29" class="col-xs-12 calendar-day">
+                    </div>
+                </div>
+                <div id="week5" class="row">
+                    <div id="29" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="30" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="30" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="31" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="31" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="32" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="32" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="33" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="33" class="col-xs-12 calendar-day">
 
-            </div>
+                    </div>
 
-            <div id="34" class="col-xs-12 calendar-day">
+                    <div id="34" class="col-xs-12 calendar-day">
 
-            </div>
-            <div id="35" class="col-xs-12 calendar-day">
+                    </div>
+                    <div id="35" class="col-xs-12 calendar-day">
 
-            </div>
-        </div>
+                    </div>
+                </div>
+            </tbody>
+        </table>
+
     </div>
     <!-- 新增事項畫面 -->
     <div class="modal fade" id="AddTodo">
