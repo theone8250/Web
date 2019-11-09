@@ -142,12 +142,15 @@
 </head>
 
 <body>
-
+    <div class="row">
+        <div class="col-2"></div>
+        <button class="col-8 btn btn-outline-info" id="ShowAddBtn">新增事項</button>
+        <div class="col-2"></div>
+    </div>
     <div id="divtitle">
-        <button class="btn btn-success" id="PrevBtn">＜Prev</button>
-        <label id="OriginMonth">2019 10</label>
-        <button class="btn btn-success" id="NextBtn">Next＞</button>
-        <button class="btn btn-outline-info" id="ShowAddBtn">新增事項</button>
+        <button class="btn btn-outline-success" id="PrevBtn">＜Prev</button>
+        <label id="OriginMonth">2019 11</label>
+        <button class="btn btn-outline-success" id="NextBtn">Next＞</button>
     </div>
     <div class="calendar" data-toggle="calendar">
         <table id="table1">
@@ -309,7 +312,7 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <form>
-                        <label>輸入日期(日期格式 : 2019-10-1)</label>
+                        <label>輸入日期(日期格式 : 2019-11-1)</label>
                         <input id="Tododate" type="text" class="form-control" />
                         <label>輸入待辦事項</label>
                         <input id="Todolist" type="datetime" class="form-control" />
